@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Golden Crust Bakery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root {
+  --primary-bg: #fff8e1;
+  --accent: #ff6f61;
+  --neutral: #ffffff;
+  --text-dark: #333;
+  --text-light: #fff;
+  --font-base: 16px;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-family); line-height: 1.6; color: var(--text-dark); }
+a { text-decoration: none; color: inherit; }
+header, section, footer { padding: 2rem 1rem; }
+header { background: var(--primary-bg); }
+nav { display: flex; justify-content: center; gap: 1rem; }
+nav a { padding: 0.5rem 1rem; background: var(--accent); color: var(--text-light); border-radius: 4px; }
+nav a:hover { opacity: 0.8; }
+.hero {
+  position: relative;
+  background: url('https://images.unsplash.com/photo-1523986371872-9d3b1c3b1b6b?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+  color: var(--text-light);
+  text-align: center;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+}
+.hero .content {
+  position: relative;
+  z-index: 1;
+}
+.hero h1 { font-size: 3rem; margin-bottom: 0.5rem; }
+.hero p { font-size: 1.25rem; margin-bottom: 1rem; }
+.hero a {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  color: var(--text-light);
+  border-radius: 4px;
+  font-weight: bold;
+}
+.menu-showcase {
+  background: var(--neutral);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.menu-card {
+  background: var(--primary-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.menu-card img { width: 100%; height: 150px; object-fit: cover; }
+.menu-card .info { padding: 1rem; flex: 1; }
+.menu-card h3 { margin-bottom: 0.5rem; }
+.menu-card p { flex: 1; }
+.menu-card a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--accent);
+  font-weight: bold;
+}
+.custom-cakes-gallery {
+  background: var(--accent);
+  color: var(--text-light);
+  overflow: hidden;
+  position: relative;
+}
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.carousel::-webkit-scrollbar { display: none; }
+.slide {
+  min-width: 100%;
+  scroll-snap-align: start;
+  position: relative;
+}
+.slide img { width: 100%; height: 400px; object-fit: cover; }
+.slide .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  text-align: center;
+}
+.slide h3 { font-size: 2rem; margin-bottom: 0.5rem; }
+.slide p { margin-bottom: 1rem; }
+.slide a {
+  padding: 0.5rem 1rem;
+  background: var(--primary-bg);
+  color: var(--text-dark);
+  border-radius: 4px;
+  font-weight: bold;
+}
+.order-ahead {
+  background: var(--primary-bg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+.order-ahead .form, .order-ahead .image {
+  flex: 1 1 300px;
+}
+.order-ahead .image img { width: 100%; border-radius: 8px; }
+.order-ahead form { display: flex; flex-direction: column; gap: 0.75rem; }
+.order-ahead label { font-weight: bold; }
+.order-ahead input, .order-ahead select, .order-ahead button {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.order-ahead button {
+  background: var(--accent);
+  color: var(--text-light);
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.order-ahead button:hover { opacity: 0.9; }
+.about {
+  background: var(--neutral);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+.about .text, .about .image {
+  flex: 1 1 300px;
+}
+.about img { width: 100%; border-radius: 8px; }
+.about ul { list-style: disc; margin-left: 1.5rem; }
+.contact {
+  background: var(--accent);
+  color: var(--text-light);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.contact .info, .contact .form {
+  flex: 1 1 300px;
+}
+.contact iframe { width: 100%; height: 300px; border: 0; }
+.contact form { display: flex; flex-direction: column; gap: 0.75rem; }
+.contact label { font-weight: bold; }
+.contact input, .contact textarea, .contact button {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.contact button {
+  background: var(--primary-bg);
+  color: var(--text-dark);
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.contact button:hover { opacity: 0.9; }
+footer { text-align: center; background: var(--primary-bg); color: var(--text-dark); }
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
+  .menu-showcase { grid-template-columns: 1fr; }
+  .custom-cakes-gallery .slide img { height: 250px; }
+  .order-ahead, .about, .contact { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<header>
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#menu_showcase">Menu</a>
+    <a href="#custom_cakes_gallery">Custom Cakes</a>
+    <a href="#order_ahead_form">Order Ahead</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="hero" class="hero">
+  <div class="content">
+    <h1>Golden Crust: Fresh Baked Goodness Every Day</h1>
+    <p>From crusty sourdough to sweet croissants, our ovens are always busy turning simple ingredients into family‑favorite treats.</p>
+    <a href="#order_ahead_form">Order Ahead</a>
+  </div>
+</section>
+
+<section id="menu_showcase" class="menu-showcase">
+  <h2 style="grid-column: 1 / -1; text-align: center; margin-bottom: 1rem;">Breads, Pastries & More</h2>
+  <p style="grid-column: 1 / -1; text-align: center; margin-bottom: 2rem;">Explore our hand‑crafted breads, flaky pastries, and seasonal specialties—all baked fresh daily.</p>
+  <div class="menu-card">
+    <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=400&q=80" alt="Sourdough Bread">
+    <div class="info">
+      <h3>Sourdough</h3>
+      <p>Our signature sourdough, slow‑fermented for a tangy crust.</p>
+      <a href="#">See All Items</a>
+    </div>
+  </div>
+  <div class="menu-card">
+    <img src="https://images.unsplash.com/photo-1523986371872-9d3b1c3b1b6b?auto=format&fit=crop&w=400&q=80" alt="Croissants">
+    <div class="info">
+      <h3>Pastries</h3>
+      <p>Flaky croissants, danishes, and seasonal delights.</p>
+      <a href="#">See All Items</a>
+    </div>
+  </div>
+  <div class="menu-card">
+    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=400&q=80" alt="Seasonal Bread">
+    <div class="info">
+      <h3>Seasonal</h3>
+      <p>Special breads and treats that change with the seasons.</p>
+      <a href="#">See All Items</a>
+    </div>
+  </div>
+</section>
+
+<section id="custom_cakes_gallery" class="custom-cakes-gallery">
+  <h2 style="text-align: center; margin: 1rem 0;">Custom Cakes for Every Occasion</h2>
+  <p style="text-align: center; margin-bottom: 1rem;">From birthdays to weddings, our cakes are made to your taste and design—just give us your vision and we’ll bring it to life.</p>
+  <div class="carousel">
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1589308078059-1b1b1b1b1b1b?auto=format&fit=crop&w=1200&q=80" alt="Birthday Cake">
+      <div class="overlay">
+        <h3>Birthday Bliss</h3>
+        <p>Bright colors and sweet flavors for a memorable celebration.</p>
+        <a href="#">Design Your Cake</a>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1589308078059-1b1b1b1b1b1b?auto=format&fit=crop&w=1200&q=80" alt="Wedding Cake">
+      <div class="overlay">
+        <h3>Elegant Weddings</h3>
+        <p>Classic designs that complement your special day.</p>
+        <a href="#">Design Your Cake</a>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1589308078059-1b1b1b1b1b1b?auto=format&fit=crop&w=1200&q=80" alt="Custom Cake">
+      <div class="overlay">
+        <h3>Custom Creations</h3>
+        <p>Unique flavors and themes tailored to you.</p>
+        <a href="#">Design Your Cake</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="order_ahead_form" class="order-ahead">
+  <div class="image">
+    <img src="https://images.unsplash.com/photo-1589308078059-1b1b1b1b1b1b?auto=format&fit=crop&w=800&q=80" alt="Order Ahead">
+  </div>
+  <div class="form">
+    <h2>Order Ahead, Pick Up Fresh</h2>
+    <p>Select your favorite items, choose a pickup time, and we’ll have them ready when you arrive.</p>
+    <form action="#" method="post">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" required>
+      <label for="item">Item</label>
+      <select id="item" name="item" required>
+        <option value="">Select an item</option>
+        <option value="sourdough">Sourdough Bread</option>
+        <option value="croissant">Croissant</option>
+        <option value="cake">Custom Cake</option>
+      </select>
+      <label for="pickup">Pickup Time</label>
+      <input type="datetime-local" id="pickup" name="pickup" required>
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="text">
+    <h2>Our Story</h2>
+    <p>Founded in 2015, Golden Crust began as a neighborhood bakery with a simple promise: use only the finest local ingredients and bake with love. Today, we serve families, students, and office workers with breads that rise to the occasion, guided by our core values of quality, community, and sustainability.</p>
+    <ul>
+      <li>Quality</li>
+      <li>Community</li>
+      <li>Sustainability</li>
+    </ul>
+  </div>
+  <div class="image">
+    <img src="https://images.unsplash.com/photo-1589308078059-1b1b1b1b1b1b?auto=format&fit=crop&w=800&q=80" alt="Bakery">
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="info">
+    <h2>Get in Touch</h2>
+    <p>Drop by our shop, give us a call, or send us a message—our team is ready to help you find the perfect baked good.</p>
+    <p><strong>Address:</strong> 123 Bread Lane, Sweetville</p>
+    <p><strong>Phone:</strong> (555) 123-4567</p>
+    <p><strong>Email:</strong> contact@goldencrust.com</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019842123456!2d-122.419415084681!3d37.774929779759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c0b0b0b0b%3A0x0!2sGolden%20Crust%20Bakery!5e0!3m2!1sen!2sus!4v1610000000000" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+  <div class="form">
+    <form action="#" method="post">
+      <label for="cname">Name</label>
+      <input type="text" id="cname" name="cname" required>
+      <label for="cemail">Email</label>
+      <input type="email" id="cemail" name="cemail" required>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Golden Crust Bakery. All rights reserved.</p>
+</footer>
+</body>
+</html>
